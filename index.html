@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Painter</title>
+	<link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body>
+	<canvas id="canvas1"></canvas>
+	<script type="module">
+		import {Maze,Point} from "./script.js"
+		const maze = new Maze(document.getElementById("canvas1"));
+		let size = new Point(30, 30);
+		maze.build(size, 20 , new Point(Math.floor(Math.random() * size.x), Math.floor(Math.random() * size.y)));
+		maze.wallsize = 4;
+		maze.animate(0);
+		// maze.fast();
+	</script>
+</body>
+</html>
