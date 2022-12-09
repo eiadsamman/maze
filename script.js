@@ -16,6 +16,19 @@ export class Bounds {
 		this.visited = false;
 	}
 };
+
+
+
+/*
+
+console.profile();
+
+doSomeExpensiveWork();
+
+console.profileEnd();
+*/
+
+
 export class Maze {
 	constructor(canvas) {
 		this.canvas = canvas;

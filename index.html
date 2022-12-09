@@ -11,11 +11,11 @@
 	<script type="module">
 		import {Maze,Point} from "./script.js"
 		const maze = new Maze(document.getElementById("canvas1"));
-		let size = new Point(30, 30);
-		maze.build(size, 20 , new Point(Math.floor(Math.random() * size.x), Math.floor(Math.random() * size.y)));
+		let size = new Point(20, 20);
+		maze.build(size, 30 , new Point(Math.floor(Math.random() * size.x), Math.floor(Math.random() * size.y)));
 		maze.wallsize = 4;
-		maze.animate(0);
-		// maze.fast();
+		// maze.animate(0);
+		maze.fast();
 	</script>
 </body>
 </html>
