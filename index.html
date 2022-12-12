@@ -1,21 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Painter</title>
-	<link rel="stylesheet" type="text/css" href="../style.css" />
+	<title>Maze generator</title>
 </head>
-<body>
+
+<body style="background-color: #000000;font-family: verdana;color:#ffffff">
+	<span id="fps" style="display:inline-block;width:100px;">0fps</span>
+
+	<br />
+	<span>x: </span><input type="number" id="inpWidth" style="width:60px;display:inline-block" min="2" max="400"
+		value="40" />
+	<span>y: </span><input type="number" id="inpHeight" style="width:60px;display:inline-block" min="2" max="400"
+		value="20" />
+	<button id="cmdAnimate">Animate new maze</button>
+	<button id="cmdBuild">Build new maze</button>
+	<br />
+	<br />
+
+	<span>cell size: </span><input type="number" id="inpCellSize" style="width:60px;display:inline-block" min="1"
+		max="60" value="20" />
+	<span>wall size: </span><input type="number" id="inpWalls" style="width:60px;display:inline-block" min="0" max="30"
+		value="4" />
+
+	<br />
+	<br />
 	<canvas id="canvas1"></canvas>
 	<script type="module">
-		import {Maze,Point} from "./script.js"
+		import { Maze, Point } from "./script.js"
+
+		let dimensions = new Point(40, 20);
+		let inpWidth = document.getElementById("inpWidth");
+		let inpHeight = document.getElementById("inpHeight");
+
 		const maze = new Maze(document.getElementById("canvas1"));
-		let size = new Point(20, 20);
-		maze.build(size, 30 , new Point(Math.floor(Math.random() * size.x), Math.floor(Math.random() * size.y)));
-		maze.wallsize = 4;
-		// maze.animate(0);
+		maze.build(dimensions, new Point(Math.floor(Math.random() * dimensions.x), Math.floor(Math.random() * dimensions.y)));
 		maze.fast();
+		
+		document.getElementById("cmdAnimate").onclick = function (event) {
+			dimensions = new Point(parseInt(inpWidth.value), parseInt(inpHeight.value));
+			maze.build(dimensions, new Point(Math.floor(Math.random() * dimensions.x), Math.floor(Math.random() * dimensions.y)));
+			maze.animate(0);
+		}
+		document.getElementById("cmdBuild").onclick = function (event) {
+			dimensions = new Point(parseInt(inpWidth.value), parseInt(inpHeight.value));
+			maze.build(dimensions, new Point(Math.floor(Math.random() * dimensions.x), Math.floor(Math.random() * dimensions.y)));
+			maze.fast();
+		}
+		document.getElementById("inpWalls").onchange = function (event) {
+			maze.wallsize = parseInt(this.value);
+			maze.plot();
+		}
+		document.getElementById("inpCellSize").onchange = function (event) {
+			maze.cellsize = parseInt(this.value);
+			maze.plot();
+		}
+
 	</script>
+
 </body>
+
 </html>
